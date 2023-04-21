@@ -28,14 +28,17 @@
         methods: {
             Submit() {
                 console.log('Submit')
-            }
+            },
+            
         }
+        
     }
 </script>
 
 <style scoped>
     h1 {
         margin-bottom: 20px;
+        padding-top: 100px;
     }
     p {
         text-align: center;
