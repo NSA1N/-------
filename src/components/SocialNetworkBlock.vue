@@ -1,11 +1,12 @@
 <template>
-<div class="slide-container container ">
-                <div class="slider-txt">
+<!-- <div class="slide-container container "> -->
+                <div>
                     <h1>My social networks</h1>
-                    <p1>There are many reasons to get down and start to get depressed about your situation.</p1>
+                    <p class="neutral-4-color">There are many reasons to get down and start to get depressed about your situation.</p>
+                    <SliderWrapper/>
                 </div>
                 
-                <div class="slide-content  swiper">
+                <!-- <div class="slide-content  swiper">
                     <div class="card-wrapper  swiper-wrapper">
                         <div class="card swiper-slide">
                             <div class="image-content">
@@ -21,27 +22,37 @@
                         </div>
                     </div>                                     
                 </div>              
-            </div>
+            </div> -->
 </template>
 
 <script>
+import SliderWrapper from '@/components/Slider.vue';
+
 export default {
     name: 'SocialNetworkBlock',
-    methods: {
-        
+    components: {
+            SliderWrapper
         }
     }
 
 </script>
 
 <style>
-.slider-txt {
+ h1 {
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+    p {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+/* .slider-txt {
     text-align: center;
     padding-top: 100px;
     padding-bottom: 40px;
-}
+} */
 
-.card-image {
+/* .card-image {
     position: static;
     margin-top: 40px;
     padding-bottom: 120px;
@@ -60,5 +71,5 @@ export default {
     margin: 20px;
     padding-bottom: 120px;
    
-}
+} */
 </style>

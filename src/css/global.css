@@ -22,7 +22,9 @@
 .neutral-4-color {
     color: #95A1BB
 }
-
+.notValid {
+    border: 1px solid #DF1F1F;
+}
 .hero {
     font-size: 58px;
     font-weight: 500;

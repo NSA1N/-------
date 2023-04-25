@@ -46,7 +46,7 @@ export default {
                 },
                 {
                     label: 'Coutacts Us',
-                    url: '#contacts'
+                    url: '#contact'
                 },
                 {
                     label: 'Blog',

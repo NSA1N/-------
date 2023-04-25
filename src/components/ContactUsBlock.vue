@@ -6,8 +6,18 @@
         </p>
         <form @submit.prevent.stop="Submit">
             <div class="inputs">
-                <input placeholder="Your name" v-model="name"/>
-                <input placeholder="Email" v-model="email" type="email"/>
+                <input 
+                placeholder="Your name" 
+                v-model.lazy="name"
+                :class="{'notValid': !nameIsValid}"
+                />
+
+                <input
+                 placeholder="Email" 
+                 v-model.lazy="email" 
+                 type="email"
+                 :class="{notValid: !emailIsValid}"
+                 />
             </div>
             <textarea placeholder="Description (optional)" v-model="description"/>
             <button @click.prevent.stop="Submit">Send</button>
@@ -16,21 +26,44 @@
 </template>
 
 <script>
+
+
     export default {
         name: 'ContactusBlock',
         data: () => {
             return {
                 name: '',
                 email: '',
-                description: ''
+                description: '',
+               
+                nameIsValid: true,
+                emailIsValid: true,
+                censorShip: ["Бля"]
             }
         },
+
+   
         methods: {
             Submit() {
                 console.log('Submit')
+            }
+        },
+
+        watch: {
+            name: function (value) {
+                const re=/[^a-zA-Zа-яА-Я ]/ui
+                this.nameIsValid = !re.test (value)
+            },
+            email: function (value) {
+                const re = new RegExp("^((([0-9A-Za-z]{1}[-0-9A-z\\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\\.){1,}[-A-Za-z]{2,})$")
+                this.emailIsValid = re.test (value)
             },
             
+           
+
         }
+
+    
         
     }
 </script>

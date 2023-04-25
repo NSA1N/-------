@@ -1,13 +1,36 @@
 <template>
 <footer>
-            <p class="foot-info">Copyright © 2023. All rights reserved.</p>
+            <p class="foot-info">Copyright © {{ localeDate }}. All rights reserved.</p>
         </footer>
 </template>
 
 <script>
  export default {
-        name: 'FooterBlock'
+        name: 'FooterBlock',
+        data: () => ({
+        // Дата хранится в виде числа
+        date: 1580558031264,
+    }),
+    
+    computed: {
+        localeDate() {
+            return (new Date(this.date)).getFullYear() 
+        },
+        
+    },
+    
+    //Таймер для изменения даты в реальном времени
+    created() {
+        this.intervalId = setInterval(() => this.date = Date.now(), 1000); // Обновление значения раз в секунду
+    },
+
+    //Соответсвенно для отключения
+    beforeDestroy() {
+        if (this.intervalId) clearInterval(this.intervalId)
+    },
+       
     }
+    
 </script>
 
 <style>
