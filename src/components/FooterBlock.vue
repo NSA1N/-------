@@ -9,25 +9,31 @@
         name: 'FooterBlock',
         data: () => ({
         // Дата хранится в виде числа
-        date: 1580558031264,
+        // date: 1580558031264,
     }),
     
     computed: {
-        localeDate() {
-            return (new Date(this.date)).getFullYear() 
-        },
+
+        localeDate: function () {
+            return new Date().getFullYear();
+          }, 
+
+
+        // localeDate() {
+        //     return (new Date(this.date)).getFullYear() 
+        // },
         
     },
     
-    //Таймер для изменения даты в реальном времени
-    created() {
-        this.intervalId = setInterval(() => this.date = Date.now(), 1000); // Обновление значения раз в секунду
-    },
+    // //Таймер для изменения даты в реальном времени
+    // created() {
+    //     this.intervalId = setInterval(() => this.date = Date.now(), 1000); // Обновление значения раз в секунду
+    // },
 
-    //Соответсвенно для отключения
-    beforeDestroy() {
-        if (this.intervalId) clearInterval(this.intervalId)
-    },
+    // //Соответсвенно для отключения
+    // beforeDestroy() {
+    //     if (this.intervalId) clearInterval(this.intervalId)
+    // },
        
     }
     

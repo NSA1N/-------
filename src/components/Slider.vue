@@ -7,7 +7,9 @@
                 v-for="(slide, index) in slides"
                 :key="index"
             >
+            <a target="_blank" href="https://vk.com/rowmerser">
                 <img :src="slide"/>
+            </a>
             </swiper-slide>
         </swiper>
         
@@ -33,8 +35,7 @@
                     '/images/slider/3.png',
                     '/images/slider/4.png',
                     '/images/slider/5.png',
-                    '/images/slider/5.png',
-                    '/images/slider/5.png',
+                    '/images/slider/6.png',
                 ],
             }
         },
@@ -43,9 +44,9 @@
                 return {
                     slidesPerView: 1,
                     spaceBetween: 20,
-                    slidesPerGroup: 3,
+                    slidesPerGroup: 1,
                     loop: true,
-                    loopFillGroupWithBlank: true,
+                    loopFillGroupWithBlank: false,
                     navigation: {
                         nextEl: '.arrow_right',
                         prevEl: '.arrow_left'
@@ -110,4 +111,9 @@
         width: 100px;
         height: 80px;
     }
+
+    a:hover img {   
+  transform: scale(1.2); 
+  transition: 3s;
+}
 </style>
