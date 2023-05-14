@@ -4,7 +4,7 @@
         <p class="neutral-4-color">
             Life is 10% what happens to you and 90% how you react to it. It does not matter how slowly you go as long as you do not stop. Confucius.
         </p>
-        <form @submit.prevent.stop="Submit">
+        <form>
             <div class="inputs">
                 <input 
                 placeholder="Your name" 
@@ -19,14 +19,16 @@
                  :class="{notValid: !emailIsValid}"
                  />
             </div>
-            <textarea placeholder="Description (optional)" v-model="description"/>
-            <button @click.prevent.stop="Submit">Send</button>
+            <textarea placeholder="Description (optional)" v-model.lazy="description"/>
+            <button @click= "doPost()">Send</button>
+            
+            
         </form>
     </section>
 </template>
 
 <script>
-
+import axios from 'axios';
 
     export default {
         name: 'ContactusBlock',
@@ -39,13 +41,26 @@
                 nameIsValid: true,
                 emailIsValid: true,
                 censorShip: ["Бля"]
+
+               
             }
         },
 
    
         methods: {
-            Submit() {
-                console.log('Submit')
+            doPost ()  {
+                axios 
+                .post('https://jsonplaceholder.typicode.com/users', { 
+                    name: this.name,
+                    email: this.email,
+                    description: this.description,
+                })
+                .then(() => {
+                    console.log();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
             }
         },
 
@@ -58,7 +73,11 @@
                 const re = new RegExp("^((([0-9A-Za-z]{1}[-0-9A-z\\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\\.){1,}[-A-Za-z]{2,})$")
                 this.emailIsValid = re.test (value)
             },
-            
+            description: function(value) {
+                for(const item of this.censorShip) {
+                    this.description = value.replaceAll(item, '*')
+                }
+            },
            
 
         }

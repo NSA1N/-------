@@ -1,8 +1,8 @@
 <template>
 <!-- <div class="slide-container container "> -->
                 <div>
-                    <h1>My social networks</h1>
-                    <p class="neutral-4-color">There are many reasons to get down and start to get depressed about your situation.</p>
+                    <h1>{{ title }}</h1>
+                    <p class="neutral-4-color">{{ subtitle }}</p>
                     <SliderWrapper/>
                 </div>
                 
@@ -27,12 +27,31 @@
 
 <script>
 import SliderWrapper from '@/components/Slider.vue';
+import axios from 'axios';
 
 export default {
     name: 'SocialNetworkBlock',
     components: {
             SliderWrapper
-        }
+        }, 
+        data: () => {
+            return {
+                info: [],
+                title: [],
+                subtitle: [],
+            }
+        },
+
+        mounted () {
+                axios
+                .get('/API/data.json')
+      .then(response => {
+        this.info = response.data.social.info
+        this.title = response.data.social.title
+        this.subtitle = response.data.social.subtitle
+        console.log(this.info)
+    });
+}
     }
 
 </script>

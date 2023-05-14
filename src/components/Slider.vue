@@ -3,13 +3,18 @@
         <div class="arrow_left"><img src="/images/slider/arrow.png"/></div>
 
         <swiper class="swiper container" :options="swiperOption">
+            
             <swiper-slide
-                v-for="(slide, index) in slides"
+                v-for="(slide, index) in info"
                 :key="index"
-            >
-            <a target="_blank" href="https://vk.com/rowmerser">
-                <img :src="slide"/>
+                
+                >
+            
+            <a target="_blank" :href="slide.link">
+                <img :src="slide.icon"/>
+                
             </a>
+            
             </swiper-slide>
         </swiper>
         
@@ -20,6 +25,7 @@
 <script>
     import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
     import 'swiper/css/swiper.css'
+    import axios from 'axios';
 
     export default {
         name: 'SliderWrapper',
@@ -29,14 +35,15 @@
         },
         data: () => {
             return {
-                slides: [
-                    '/images/slider/1.png',
-                    '/images/slider/2.png',
-                    '/images/slider/3.png',
-                    '/images/slider/4.png',
-                    '/images/slider/5.png',
-                    '/images/slider/6.png',
-                ],
+                // slides: [
+                //     '/images/slider/1.png',
+                //     '/images/slider/2.png',
+                //     '/images/slider/3.png',
+                //     '/images/slider/4.png',
+                //     '/images/slider/5.png',
+                //     '/images/slider/6.png',
+                // ],
+                info: [],
             }
         },
         computed: {
@@ -64,6 +71,14 @@
                 }
             }
         },
+        mounted () {
+                axios
+                .get('/API/data.json')
+      .then(response => {
+        this.info = response.data.social.content
+        console.log(this.info)
+    });
+}
     }
 </script>
 

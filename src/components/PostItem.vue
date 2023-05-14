@@ -4,7 +4,7 @@
         <div class="post-item__contain">
             <div class="post-item__text">
                 <h4>{{ item.title }}</h4>
-                <p>{{ item.text }}</p>
+                <p>{{ item.description }}</p>
             </div>
             <div class="post-item__actions">
                 <p class="neutral-4-color">{{ item.date }}</p>
@@ -15,10 +15,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
     export default {
         name: 'PostItem',
         props: {
             item: Object
+        },
+        mounted () {
+                axios
+                .get('/API/data.json')
+      .then(response => {
+        this.info = response.data.posts.content
+        console.log(this.info)
+    });
+        
+            
+      // eslint-disable-next-line no-undef
+      
         }
     }
 </script>

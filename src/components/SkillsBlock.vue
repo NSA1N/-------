@@ -1,47 +1,33 @@
 <template>
     <section class="container">
-        <h1>Skills</h1>
+        <h1>{{ title }}</h1>
         <div class="skills-wrapper">
             <div 
                 :class="['skills-item', {'skills-item_active': index === activeIndex}]"
-                v-for="(item, index) in skillsList"
+                v-for="(item, index) in info"
                 :key="index"
             >
                 <div class="skills-item__header">
-                    <h6>{{ item.header }}</h6>
+                    <h6>{{ item.key }}</h6>
 
                     <button @click="toggleAccordion(index)"><img :src="`/images/${index === activeIndex ? 'minus' : 'plus'}.png`"/></button>
                 </div>
-                <p v-show="index === activeIndex" class="skills-item__text">{{ item.text }}</p>
+                <p v-show="index === activeIndex" class="skills-item__text">{{ item.value }}</p>
             </div>
         </div>
     </section>
 </template>
 
 <script>
+import axios from 'axios';
+
     export default {
         name: 'SkillsBlock',
         data: () => {
             return {
+                info: [],
                 activeIndex: null,
-                skillsList: [
-                    {
-                        header: 'Html',
-                        text: '50/50.',
-                    },
-                    {
-                        header: 'CSS',
-                        text: 'Более-менее',
-                    },
-                    {
-                        header: 'JavaScript',
-                        text: 'Плохо.',
-                    },
-                    {
-                        header: 'Vue',
-                        text: 'Очень плохо.',
-                    }
-                ]
+                title: [],
             }
         },
         methods: {
@@ -51,9 +37,27 @@
                 } else {
                     this.activeIndex = index
                 }
+            },
+        },
+
+        mounted () {
+                axios
+                .get('/API/data.json')
+      .then(response => {
+        this.info = response.data.skills.content
+        this.title = response.data.skills.title
+        console.log(this.info)
+    });
+        
+            
+      // eslint-disable-next-line no-undef
+      
             }
+            
+        
         }
-    }
+            
+    
 </script>
 
 <style scoped>

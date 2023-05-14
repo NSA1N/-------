@@ -1,17 +1,18 @@
 <template>
     <section class="container">
-        <h1>Last posts</h1>
+        <h1>{{title}}</h1>
         <div class="link-wrapper">
             <a class="disabled" href="#">All Posts</a>
         </div>
         <div class="posts-wrapper">
-            <PostItem v-for="(item, index) in posts" :key="index" :item="item"/>
+            <PostItem v-for="(item, index) in info" :key="index" :item="item"/>
         </div>
     </section>
 </template>
 
 <script>
     import PostItem from '@/components/PostItem.vue';
+    import axios from 'axios';
 
     export default {
         name: 'LastPostsBlock',
@@ -20,27 +21,43 @@
         },
         data: () => {
             return {
-                posts: [
-                    {
-                        img: '/images/post.png',
-                        title: 'There are many reasons to get down',
-                        text: 'The only moment, the only life we have is in the NOW. What happened a few moments or several years ago is gone, what will happen this evening, or next month when we go on holidays is not here yet.',
-                        date: '10	Oct 21'
-                    },
-                    {
-                        img: '/images/post.png',
-                        title: 'Choosing The Right Path',
-                        text: 'Although this is well intentioned and the goal certainly is to reduce the quantity of these bothersome thoughts, the technique is inherently flawed. Requiring the individual to remember what not to think of infers that they have already thought it. It is akin to telling them to not think of a blue banana.',
-                        date: '18	Oct 20'
-                    },
-                    {
-                        img: '/images/post.png',
-                        title: 'Start your journey here',
-                        text: 'The only moment, the only life we have is in the NOW. What happened a few moments or several years ago is gone, what will happen this evening, or next month when we go on holidays is not here yet. Although this is well intentioned and the goal certainly is to reduce the quantity of these bothersome thoughts, the technique is inherently flawed. Requiring the individual to remember what not to think of infers that they have already thought it. It is akin to telling them to not think of a blue banana.',
-                        date: '29	Oct 18'
-                    }
-                ]
+                content: [],
+                title: [],
+                // posts: [
+                //     {
+                //         img: '/images/post.png',
+                //         title: 'There are many reasons to get down',
+                //         text: 'The only moment, the only life we have is in the NOW. What happened a few moments or several years ago is gone, what will happen this evening, or next month when we go on holidays is not here yet.',
+                //         date: '10	Oct 21'
+                //     },
+                //     {
+                //         img: '/images/post.png',
+                //         title: 'Choosing The Right Path',
+                //         text: 'Although this is well intentioned and the goal certainly is to reduce the quantity of these bothersome thoughts, the technique is inherently flawed. Requiring the individual to remember what not to think of infers that they have already thought it. It is akin to telling them to not think of a blue banana.',
+                //         date: '18	Oct 20'
+                //     },
+                //     {
+                //         img: '/images/post.png',
+                //         title: 'Start your journey here',
+                //         text: 'The only moment, the only life we have is in the NOW. What happened a few moments or several years ago is gone, what will happen this evening, or next month when we go on holidays is not here yet. Although this is well intentioned and the goal certainly is to reduce the quantity of these bothersome thoughts, the technique is inherently flawed. Requiring the individual to remember what not to think of infers that they have already thought it. It is akin to telling them to not think of a blue banana.',
+                //         date: '29	Oct 18'
+                //     }
+                // ]
             }
+        },
+
+        mounted () {
+                axios
+                .get('/API/data.json')
+      .then(response => {
+        this.info = response.data.posts.content
+        this.title = response.data.posts.title
+        console.log(this.info)
+    });
+        
+            
+      // eslint-disable-next-line no-undef
+      
         }
     }
 </script>
