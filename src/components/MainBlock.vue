@@ -2,8 +2,8 @@
     <section>
         <div class="container">
            
-            <div class="main-block__name hero">{{title}}</div>
-            <p class="main-block__text neutral-4-color">{{description}}</p>
+            <div class="main-block__name hero">{{promo.title}}</div>
+            <p class="main-block__text neutral-4-color">{{promo.description}}</p>
             <a href="#skills" @click.prevent.stop="scrollToMore">Scroll to More</a>
         </div>
 
@@ -14,7 +14,7 @@
 
 <script>
 import {ScrolToElement} from '@/ForScroll/Scroll'
-import axios from 'axios';
+
 
 export default {
     name: 'MainBlock',
@@ -23,29 +23,13 @@ export default {
             ScrolToElement('#skills')
         },
     },
-    
-    data: () => {
-            return {
-                info: [],
-                title: [],
-                description: [],
-            }
-        },
-    mounted () {
-                axios
-                .get('/API/data.json')
-                .then(response => {
-        
-        this.title = response.data.promo.title
-        this.description = response.data.promo.description
-        console.log(this.info)
-    });
-        
-            
-      // eslint-disable-next-line no-undef
-      
-            }
-}
+    props: {
+        promo: {
+      type: Object,
+      default: () => {
+      },
+    }
+}}
 </script>
 
 <style scoped>

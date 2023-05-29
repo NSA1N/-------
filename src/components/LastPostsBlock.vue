@@ -1,18 +1,18 @@
 <template>
     <section class="container">
-        <h1>{{title}}</h1>
+        <h1>{{posts.title}}</h1>
         <div class="link-wrapper">
             <a class="disabled" href="#">All Posts</a>
         </div>
         <div class="posts-wrapper">
-            <PostItem v-for="(item, index) in info" :key="index" :item="item"/>
+            <PostItem v-for="(item, index) in posts.content" :key="index" :item="item"/>
         </div>
     </section>
 </template>
 
 <script>
     import PostItem from '@/components/PostItem.vue';
-    import axios from 'axios';
+
 
     export default {
         name: 'LastPostsBlock',
@@ -21,8 +21,8 @@
         },
         data: () => {
             return {
-                content: [],
-                title: [],
+                // content: [],
+                // title: [],
                 // posts: [
                 //     {
                 //         img: '/images/post.png',
@@ -45,20 +45,26 @@
                 // ]
             }
         },
-
-        mounted () {
-                axios
-                .get('/API/data.json')
-      .then(response => {
-        this.info = response.data.posts.content
-        this.title = response.data.posts.title
-        console.log(this.info)
-    });
+        props: {
+            posts: {
+            type: Object,
+            default: () => {
+            },
+            }
+        },
+    //     mounted () {
+    //             axios
+    //             .get('/API/data.json')
+    //   .then(response => {
+    //     this.info = response.data.posts.content
+    //     this.title = response.data.posts.title
+    //     console.log(this.info)
+    // });
         
             
-      // eslint-disable-next-line no-undef
+    //   // eslint-disable-next-line no-undef
       
-        }
+    //     }
     }
 </script>
 

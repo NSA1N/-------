@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <HeaderBlock/>
-    <MainBlock class="main-block" id="about"/>
-    <SkillsBlock class="skills-block" id="skills"/>
-    <SocialNetworkBlock class="social-block" id="social"/>
-    <LastPostsBlock class="last-posts-block"/>
+    <MainBlock v-bind:promo="promo" class="main-block" id="about"/>
+    <SkillsBlock v-bind:skills="skills" class="skills-block" id="skills"/>
+    <SocialNetworkBlock v-bind:social="social" class="social-block" id="social"/>
+    <LastPostsBlock v-bind:posts="posts" class="last-posts-block"/>
     <ContactUsBlock class="contact-us-block" id="contact"/>
     <FooterBlock class="footer-block" id="footer"/>
   </div>
@@ -18,7 +18,7 @@ import SocialNetworkBlock from '@/components/SocialNetworkBlock.vue';
 import LastPostsBlock from '@/components/LastPostsBlock.vue';
 import ContactUsBlock from '@/components/ContactUsBlock.vue';
 import FooterBlock from '@/components/FooterBlock.vue';
-
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -30,8 +30,25 @@ export default {
     ContactUsBlock,
     FooterBlock,
     LastPostsBlock,
-  }
-}
+  },
+  data () {
+    return {
+      promo: null,
+      skills: null,
+      social: null,
+      posts: null,
+    }},
+  created() {
+    axios
+        .get('/API/data.json')
+        .then(response => {       
+        this.promo = response.data.promo
+        this.skills = response.data.skills
+        this.social = response.data.social
+        this.posts = response.data.posts
+        console.log(response.data)
+  })
+  }}
 </script>
 
 <style>

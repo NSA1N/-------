@@ -1,14 +1,14 @@
 <template>
     <section class="container">
-        <h1>{{ title }}</h1>
+        <h1>{{ skills.title }}</h1>
         <div class="skills-wrapper">
             <div 
                 :class="['skills-item', {'skills-item_active': index === activeIndex}]"
-                v-for="(item, index) in info"
+                v-for="(item, index) in skills.content"
                 :key="index"
             >
                 <div class="skills-item__header">
-                    <h6>{{ item.key }}</h6>
+                    <h6> {{ item.key }}</h6>
 
                     <button @click="toggleAccordion(index)"><img :src="`/images/${index === activeIndex ? 'minus' : 'plus'}.png`"/></button>
                 </div>
@@ -19,15 +19,16 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 
     export default {
         name: 'SkillsBlock',
         data: () => {
             return {
-                info: [],
+                // info: [],
                 activeIndex: null,
-                title: [],
+                // title: [],
+                
             }
         },
         methods: {
@@ -40,14 +41,22 @@ import axios from 'axios';
             },
         },
 
-        mounted () {
-                axios
-                .get('/API/data.json')
-      .then(response => {
-        this.info = response.data.skills.content
-        this.title = response.data.skills.title
-        console.log(this.info)
-    });
+        props: {
+            skills: {
+            type: Object,
+            default: () => {
+            },
+            }
+        },
+
+    //     mounted () {
+    //             axios
+    //             .get('/API/data.json')
+    //   .then(response => {
+    //     this.info = response.data.skills.content
+    //     this.title = response.data.skills.title
+    //     console.log(this.info)
+    // });
         
             
       // eslint-disable-next-line no-undef
@@ -55,7 +64,7 @@ import axios from 'axios';
             }
             
         
-        }
+        
             
     
 </script>

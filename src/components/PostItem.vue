@@ -8,32 +8,36 @@
             </div>
             <div class="post-item__actions">
                 <p class="neutral-4-color">{{ item.date }}</p>
-                <a class="disabled" href="#">Read More</a>
+                <a class="disabled" :href="item.link">Read More</a>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+
 
     export default {
         name: 'PostItem',
         props: {
-            item: Object
+            posts: {
+            type: Object,
+            default: () => {
+            },
+            }
         },
-        mounted () {
-                axios
-                .get('/API/data.json')
-      .then(response => {
-        this.info = response.data.posts.content
-        console.log(this.info)
-    });
+    //     mounted () {
+    //             axios
+    //             .get('/API/data.json')
+    //   .then(response => {
+    //     this.info = response.data.posts.content
+    //     console.log(this.info)
+    // });
         
             
-      // eslint-disable-next-line no-undef
+    //   // eslint-disable-next-line no-undef
       
-        }
+    //     }
     }
 </script>
 

@@ -20,7 +20,7 @@
                  />
             </div>
             <textarea placeholder="Description (optional)" v-model.lazy="description"/>
-            <button @click= "doPost()">Send</button>
+            <button @click.prevent= "doPost()">Send</button>
             
             
         </form>
@@ -67,11 +67,11 @@ import axios from 'axios';
         watch: {
             name: function (value) {
                 const re=/[^a-zA-Zа-яА-Я ]/ui
-                this.nameIsValid = !re.test (value)
+                this.nameIsValid = !re.test(value)
             },
             email: function (value) {
                 const re = new RegExp("^((([0-9A-Za-z]{1}[-0-9A-z\\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\\.){1,}[-A-Za-z]{2,})$")
-                this.emailIsValid = re.test (value)
+                this.emailIsValid = re.test(value)
             },
             description: function(value) {
                 for(const item of this.censorShip) {

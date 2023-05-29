@@ -5,7 +5,7 @@
         <swiper class="swiper container" :options="swiperOption">
             
             <swiper-slide
-                v-for="(slide, index) in info"
+                v-for="(slide, index) in social.content"
                 :key="index"
                 
                 >
@@ -25,7 +25,7 @@
 <script>
     import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
     import 'swiper/css/swiper.css'
-    import axios from 'axios';
+
 
     export default {
         name: 'SliderWrapper',
@@ -43,7 +43,7 @@
                 //     '/images/slider/5.png',
                 //     '/images/slider/6.png',
                 // ],
-                info: [],
+                // info: [],
             }
         },
         computed: {
@@ -71,14 +71,21 @@
                 }
             }
         },
-        mounted () {
-                axios
-                .get('/API/data.json')
-      .then(response => {
-        this.info = response.data.social.content
-        console.log(this.info)
-    });
-}
+        props: {
+            social: {
+            type: Object,
+            default: () => {
+            },
+            }
+        },
+//         mounted () {
+//                 axios
+//                 .get('/API/data.json')
+//       .then(response => {
+//         this.info = response.data.social.content
+//         console.log(this.info)
+//     });
+// }
     }
 </script>
 
