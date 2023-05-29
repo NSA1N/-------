@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="container">
+        <div v-if="promo" class="container">
            
             <div class="main-block__name hero">{{promo.title}}</div>
             <p class="main-block__text neutral-4-color">{{promo.description}}</p>

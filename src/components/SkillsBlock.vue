@@ -1,5 +1,5 @@
 <template>
-    <section class="container">
+    <section v-if="skills" class="container">
         <h1>{{ skills.title }}</h1>
         <div class="skills-wrapper">
             <div 

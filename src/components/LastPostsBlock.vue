@@ -1,6 +1,6 @@
 <template>
-    <section class="container">
-        <h1>{{title}}</h1>
+    <section v-if="posts" class="container">
+        <h1>{{posts.title}}</h1>
         <div class="link-wrapper">
             <a class="disabled" href="#">All Posts</a>
         </div>

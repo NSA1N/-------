@@ -75,8 +75,8 @@ import axios from 'axios';
             },
 
             nameValidate(value) {
-                const re=/[^a-zA-Zа-яА-Я ]/ui
-                this.nameIsValid = !re.test(value)
+                const re=/[^a-zA-Zа-яА-Я ]/ui 
+                this.nameIsValid = re.test(value)
             },
 
             emailValidate(value) {

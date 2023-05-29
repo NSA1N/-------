@@ -1,6 +1,6 @@
 <template>
 <!-- <div class="slide-container container "> -->
-                <div>
+                <div v-if="social">
                     <h1>{{ social.title }}</h1>
                     <p class="neutral-4-color">{{ social.subtitle }}</p>
                     <SliderWrapper :items="social.content"/>
