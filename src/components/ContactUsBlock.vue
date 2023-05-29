@@ -4,7 +4,7 @@
         <p class="neutral-4-color">
             Life is 10% what happens to you and 90% how you react to it. It does not matter how slowly you go as long as you do not stop. Confucius.
         </p>
-        <form>
+        <form @submit="doPost()">
             <div class="inputs">
                 <input 
                 placeholder="Your name" 
@@ -45,10 +45,21 @@ import axios from 'axios';
                
             }
         },
-
+        computed:{
+            notValid() {
+                return !this.nameIsValid || !this.emailIsValid
+            }
+        },
    
         methods: {
             doPost ()  {
+                this.nameValidate(this.name)
+                this.emailValidate(this.email)
+          
+                if(this.notValid) {
+                    return
+                }
+
                 axios 
                 .post('https://jsonplaceholder.typicode.com/users', { 
                     name: this.name,
@@ -61,17 +72,25 @@ import axios from 'axios';
                 .catch(function (error) {
                     console.log(error);
                 })
-            }
+            },
+
+            nameValidate(value) {
+                const re=/[^a-zA-Zа-яА-Я ]/ui
+                this.nameIsValid = !re.test(value)
+            },
+
+            emailValidate(value) {
+                const re = new RegExp("^((([0-9A-Za-z]{1}[-0-9A-z\\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\\.){1,}[-A-Za-z]{2,})$")
+                this.emailIsValid = re.test(value)
+            },
         },
 
         watch: {
             name: function (value) {
-                const re=/[^a-zA-Zа-яА-Я ]/ui
-                this.nameIsValid = !re.test(value)
+                this.nameValidate(value)
             },
             email: function (value) {
-                const re = new RegExp("^((([0-9A-Za-z]{1}[-0-9A-z\\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\\.){1,}[-A-Za-z]{2,})$")
-                this.emailIsValid = re.test(value)
+                this.emailValidate(value)
             },
             description: function(value) {
                 for(const item of this.censorShip) {

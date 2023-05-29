@@ -5,7 +5,7 @@
         <swiper class="swiper container" :options="swiperOption">
             
             <swiper-slide
-                v-for="(slide, index) in social.content"
+                v-for="(slide, index) in items"
                 :key="index" 
                 >
             
@@ -71,10 +71,9 @@
             }
         },
         props: {
-            social: {
-            type: Object,
-            default: () => {
-            },
+            items: {
+                type: Array,
+                default: () => ([]),
             }
         },
 //         mounted () {
