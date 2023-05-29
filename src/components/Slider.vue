@@ -6,8 +6,7 @@
             
             <swiper-slide
                 v-for="(slide, index) in social.content"
-                :key="index"
-                
+                :key="index" 
                 >
             
             <a target="_blank" :href="slide.link">

@@ -20,7 +20,7 @@
     export default {
         name: 'PostItem',
         props: {
-            posts: {
+            item: {
             type: Object,
             default: () => {
             },
