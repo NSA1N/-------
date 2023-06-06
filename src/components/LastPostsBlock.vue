@@ -1,21 +1,30 @@
 <template>
-    <section v-if="posts" class="container">
-        <h1>{{posts.title}}</h1>
+    <section  class="container">
+        <h1>{{postContent.title}}</h1>
         <div class="link-wrapper">
             <a class="disabled" href="#">All Posts</a>
         </div>
         <div class="posts-wrapper">
-            <PostItem v-for="(item, index) in posts.content" :key="index" :item="item"/>
+            <PostItem v-for="(item, index) in postContent.content" :key="index" :item="postContent.content[index]"/>
         </div>
     </section>
 </template>
 
 <script>
     import PostItem from '@/components/PostItem.vue';
-
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
         name: 'LastPostsBlock',
+        computed:{
+     ...mapGetters('post',['postContent'])
+    }, 
+  methods: {
+    ...mapActions('post',['getData']),
+  },
+  mounted() {
+    this.getData()
+  },
         components: {
             PostItem,
         },
@@ -23,13 +32,13 @@
             return {
             }
         },
-        props: {
-            posts: {
-            type: Object,
-            default: () => {
-            },
-            }
-        },
+        // props: {
+        //     posts: {
+        //     type: Object,
+        //     default: () => {
+        //     },
+        //     }
+        // },
     //     mounted () {
     //             axios
     //             .get('/API/data.json')

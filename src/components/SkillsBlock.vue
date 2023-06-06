@@ -1,10 +1,10 @@
 <template>
-    <section v-if="skills" class="container">
-        <h1>{{ skills.title }}</h1>
+    <section  class="container">
+        <h1>{{ skillsList.title }}</h1>
         <div class="skills-wrapper">
             <div 
                 :class="['skills-item', {'skills-item_active': index === activeIndex}]"
-                v-for="(item, index) in skills.content"
+                v-for="(item, index) in skillsList.content"
                 :key="index"
             >
                 <div class="skills-item__header">
@@ -19,18 +19,21 @@
 </template>
 
 <script>
-
+import { mapActions, mapGetters } from 'vuex';
 
     export default {
         name: 'SkillsBlock',
         data: () => {
-            return {
-                // info: [],
+            return {          
                 activeIndex: null,
-                // title: [],
-                
             }
         },
+        mounted() {
+        this.getSkillsInformation();
+    },
+    computed: {
+        ...mapGetters('skills', ['skillsList'])
+    }, 
         methods: {
             toggleAccordion(index) {
                 if ( this.activeIndex === index) {
@@ -39,27 +42,17 @@
                     this.activeIndex = index
                 }
             },
+            ...mapActions('skills', ['getSkillsInformation']),
         },
 
-        props: {
-            skills: {
-            type: Object,
-            default: () => {
-            },
-            }
-        },
+        // props: {
+        //     skills: {
+        //     type: Object,
+        //     default: () => {
+        //     },
+        //     }
+        // },
 
-    //     mounted () {
-    //             axios
-    //             .get('/API/data.json')
-    //   .then(response => {
-    //     this.info = response.data.skills.content
-    //     this.title = response.data.skills.title
-    //     console.log(this.info)
-    // });
-        
-            
-      // eslint-disable-next-line no-undef
       
             }
             

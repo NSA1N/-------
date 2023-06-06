@@ -1,9 +1,9 @@
 <template>
 <!-- <div class="slide-container container "> -->
-                <div v-if="social">
-                    <h1>{{ social.title }}</h1>
-                    <p class="neutral-4-color">{{ social.subtitle }}</p>
-                    <SliderWrapper :items="social.content"/>
+                <div >
+                    <h1>{{ sliderList.title }}</h1>
+                    <p class="neutral-4-color">{{  sliderList.subtitle}}</p>
+                    <SliderWrapper :items="social"/>
                 </div>
                 
                 <!-- <div class="slide-content  swiper">
@@ -27,7 +27,7 @@
 
 <script>
 import SliderWrapper from '@/components/Slider.vue';
-
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'SocialNetworkBlock',
@@ -36,32 +36,28 @@ export default {
         }, 
         data: () => {
             return {
-                // info: [],
-                // title: [],
-                // subtitle: [],
-
-            }
-        },
-        props: {
-            social: {
-            type: Object,
-            default: () => {
-            },
             }
         },
 
-//         mounted () {
-//                 axios
-//                 .get('/API/data.json')
-//       .then(response => {
-//         this.info = response.data.social.info
-//         this.title = response.data.social.title
-//         this.subtitle = response.data.social.subtitle
-//         console.log(this.info)
-//     });
-// }
+        computed: {
+            ...mapGetters('slider', ['sliderList'])
+        },
+        methods: {
+            ...mapActions('slider', ['getSliderInformation']),
+        },
+        mounted() {
+            this.getSliderInformation()
+        },
     }
+        // props: {
+        //     social: {
+        //     type: Object,
+        //     default: () => {
+        //     },
+        //     }
+        // },
 
+    
 </script>
 
 <style>

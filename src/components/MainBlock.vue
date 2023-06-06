@@ -1,9 +1,9 @@
 <template>
     <section>
-        <div v-if="promo" class="container">
+        <div  class="container">
            
-            <div class="main-block__name hero">{{promo.title}}</div>
-            <p class="main-block__text neutral-4-color">{{promo.description}}</p>
+            <div class="main-block__name hero">{{promoList.title}}</div>
+            <p class="main-block__text neutral-4-color">{{promoList.description}}</p>
             <a href="#skills" @click.prevent.stop="scrollToMore">Scroll to More</a>
         </div>
 
@@ -14,22 +14,31 @@
 
 <script>
 import {ScrolToElement} from '@/ForScroll/Scroll'
-
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'MainBlock',
+    computed: {
+        ...mapGetters('main', ['promoList'])
+    },
     methods: {
         scrollToMore() {
             ScrolToElement('#skills')
         },
+
+        ...mapActions('main', ['getPromo']),
     },
-    props: {
-        promo: {
-      type: Object,
-      default: () => {
-      },
-    }
-}}
+    mounted() {
+        this.getPromo();
+    },
+//     props: {
+//         promo: {
+//       type: Object,
+//       default: () => {
+//       },
+//     }
+// }
+}
 </script>
 
 <style scoped>

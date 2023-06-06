@@ -5,7 +5,7 @@
         <swiper class="swiper container" :options="swiperOption">
             
             <swiper-slide
-                v-for="(slide, index) in items"
+                v-for="(slide, index) in sliderList.content"
                 :key="index" 
                 >
             
@@ -24,7 +24,7 @@
 <script>
     import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
     import 'swiper/css/swiper.css'
-
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
         name: 'SliderWrapper',
@@ -34,17 +34,14 @@
         },
         data: () => {
             return {
-                // slides: [
-                //     '/images/slider/1.png',
-                //     '/images/slider/2.png',
-                //     '/images/slider/3.png',
-                //     '/images/slider/4.png',
-                //     '/images/slider/5.png',
-                //     '/images/slider/6.png',
-                // ],
-                // info: [],
+                
             }
         },
+
+        mounted() {
+        this.getSliderInformation();
+    },
+
         computed: {
             swiperOption() {
                 return {
@@ -68,22 +65,18 @@
                         }
                     }
                 }
-            }
+            },
+            ...mapGetters('slider', ['sliderList'])
         },
+        methods: {
+             ...mapActions('slider', ['getSliderInformation']),
+    },
         props: {
             items: {
                 type: Array,
                 default: () => ([]),
             }
         },
-//         mounted () {
-//                 axios
-//                 .get('/API/data.json')
-//       .then(response => {
-//         this.info = response.data.social.content
-//         console.log(this.info)
-//     });
-// }
     }
 </script>
 

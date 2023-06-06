@@ -19,25 +19,13 @@
 
     export default {
         name: 'PostItem',
+
         props: {
             item: {
             type: Object,
-            default: () => {
-            },
+            
             }
         },
-    //     mounted () {
-    //             axios
-    //             .get('/API/data.json')
-    //   .then(response => {
-    //     this.info = response.data.posts.content
-    //     console.log(this.info)
-    // });
-        
-            
-    //   // eslint-disable-next-line no-undef
-      
-    //     }
     }
 </script>
 
