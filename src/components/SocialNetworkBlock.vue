@@ -3,7 +3,7 @@
                 <div >
                     <h1>{{ sliderList.title }}</h1>
                     <p class="neutral-4-color">{{  sliderList.subtitle}}</p>
-                    <SliderWrapper :items="social"/>
+                    <SliderWrapper />
                 </div>
                 
                 <!-- <div class="slide-content  swiper">

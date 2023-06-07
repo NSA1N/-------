@@ -5,7 +5,7 @@
             <a class="disabled" href="#">All Posts</a>
         </div>
         <div class="posts-wrapper">
-            <PostItem v-for="(item, index) in postContent.content" :key="index" :item="postContent.content[index]"/>
+            <PostItem v-for="(item, index) in postContent.content" :key="index" :item="item"/>
         </div>
     </section>
 </template>
@@ -39,19 +39,6 @@
         //     },
         //     }
         // },
-    //     mounted () {
-    //             axios
-    //             .get('/API/data.json')
-    //   .then(response => {
-    //     this.info = response.data.posts.content
-    //     this.title = response.data.posts.title
-    //     console.log(this.info)
-    // });
-        
-            
-    //   // eslint-disable-next-line no-undef
-      
-    //     }
     }
 </script>
 
