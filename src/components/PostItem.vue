@@ -8,7 +8,7 @@
             </div>
             <div class="post-item__actions">
                 <p class="neutral-4-color">{{ item.date }}</p>
-                <a class="disabled" :href="item.link">Read More</a>
+                <p class="rtr-link" @click="$router.push({name: 'post', params: {id: item.link}})">READ MORE</p>
             </div>
         </div>
     </div>
@@ -30,7 +30,15 @@
 </script>
 
 <style scoped>
-    .post-item {
+  
+  .rtr-link{
+    color:#6E38F7
+}
+.rtr-link:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+  .post-item {
         display: flex;
         align-items: flex-start;
         height: 270px;
