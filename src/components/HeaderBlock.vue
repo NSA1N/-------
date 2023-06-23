@@ -10,15 +10,35 @@
         </div>
 
         <nav :class="{'active': menuIsShow}">
-            <a
-                v-for="(item, index) in links"
+            <template v-for="(item, index) in links">
+                <!-- <a
+                
+                v-if="item.routerLol"
                 :key="index"
                 :href="item.url" 
                 @click.prevent.stop="goToSection(item.url)"
-                :class="{'disabled': item.disabled}"
+                
             >
-                {{ item.label }}
-            </a>
+                <router-link
+                        :to="item.linkRout"
+                        
+                    >
+                            {{ item.label }}
+                </router-link>        
+            </a> -->
+                <template v-if="!item.routerLol">
+                 <a :href="item.url"
+                 :key="index"
+                 @click.prevent.stop="goToSection(item.url)">{{ item.label }}</a>
+                </template>
+                
+                <template v-else>
+                    <router-link :to="item.linkRout"
+                    :key="index"></router-link>
+                </template>
+
+            </template>
+           
         </nav>
     </div>
     </header>
@@ -34,24 +54,30 @@ export default {
             links: [
                 {
                     label: 'About',
-                    url: '#about'
+                    url: '#about',
+                    
                 },
+                
                 {
                     label: 'Skills',
-                    url: '#skills'
+                    url: '#skills',
+                    
                 },
                 {
                     label: 'Social',
-                    url: '#social'
+                    url: '#social',
+                    
                 },
                 {
                     label: 'Coutacts Us',
-                    url: '#contact'
+                    url: '#contact',
+                    
                 },
                 {
                     label: 'Blog',
                     url: 'blog',
-                    disabled: true
+                    linkRout: '/blog',
+                    routerLol: true
                 }
             ],
             menuIsShow: false,

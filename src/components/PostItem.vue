@@ -1,6 +1,6 @@
 <template>
     <div class="post-item">
-        <img class="post-item__img" :src="item.img"/>
+        <img class="post-item__img" src="/images/john.jpg"/>
         <div class="post-item__contain">
             <div class="post-item__text">
                 <h4>{{ item.title }}</h4>
