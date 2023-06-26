@@ -11,21 +11,6 @@
 
         <nav :class="{'active': menuIsShow}">
             <template v-for="(item, index) in links">
-                <!-- <a
-                
-                v-if="item.routerLol"
-                :key="index"
-                :href="item.url" 
-                @click.prevent.stop="goToSection(item.url)"
-                
-            >
-                <router-link
-                        :to="item.linkRout"
-                        
-                    >
-                            {{ item.label }}
-                </router-link>        
-            </a> -->
                 <template v-if="!item.routerLol">
                  <a :href="item.url"
                  :key="index"
@@ -34,7 +19,7 @@
                 
                 <template v-else>
                     <router-link :to="item.linkRout"
-                    :key="index"></router-link>
+                    :key="index">{{ item.label }}</router-link>
                 </template>
 
             </template>

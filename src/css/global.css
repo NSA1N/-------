@@ -70,6 +70,7 @@ a {
     color: #6E38F7;
     letter-spacing: 2px;
     text-transform: uppercase;
+    margin-right: 10px;
 }
 a.disabled {
     pointer-events: none;
